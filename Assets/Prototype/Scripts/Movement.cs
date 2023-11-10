@@ -1,14 +1,14 @@
 using UnityEngine;
 
-namespace Prototype
+namespace Prototype.Scripts
 {
     public class Movement : MonoBehaviour
     {
         [SerializeField] private Transform _apple;
-        [SerializeField] private Transform _sphere;
-        [SerializeField] private LayerMask _appLayerMask;
-        [SerializeField] private LayerMask _sphereLayerMask;
-        [SerializeField] private float _speed;
+        [SerializeField] private Transform _surfaceForMovement;
+        [SerializeField] private LayerMask _appleLayerMask;
+        [SerializeField] private LayerMask _surfaceLayerMask;
+        [SerializeField] private float _speedMovement;
         [SerializeField] private Rigidbody _rigidbody;
 
         private float _vertical;
@@ -26,17 +26,17 @@ namespace Prototype
         private void FixedUpdate()
         {
             var position = _rigidbody.position;
-            var rayDirection = _sphere.position - position;
+            var rayDirection = _surfaceForMovement.position - position;
 
             var ray = new Ray(position, rayDirection);
-            if (Physics.Raycast(ray, out var hit, rayDirection.magnitude, _sphereLayerMask))
+            if (Physics.Raycast(ray, out var hit, rayDirection.magnitude, _surfaceLayerMask))
             {
                 var upDirection = -rayDirection.normalized;
                 _rigidbody.MovePosition(hit.point + upDirection);
                 _rigidbody.MoveRotation(Quaternion.FromToRotation(-transform.up, rayDirection) * transform.rotation);
             }
 
-            if (Physics.Raycast(ray, out var hit1, rayDirection.magnitude, _appLayerMask))
+            if (Physics.Raycast(ray, out var hit1, rayDirection.magnitude, _appleLayerMask))
             {
                 var upDirection = -rayDirection.normalized;
                 Player.position = hit1.point + upDirection;
@@ -48,7 +48,7 @@ namespace Prototype
             var forward = transform1.forward * _direction.y;
             Debug.Log(forward);
             var right = transform1.right * _direction.x;
-            _rigidbody.velocity = (forward + right) * _speed;
+            _rigidbody.velocity = (forward + right) * _speedMovement;
 
             Debug.DrawRay(transform1.position, -transform1.up * 5, Color.green);
         }

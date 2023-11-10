@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Prototype
+namespace Prototype.Scripts
 {
     public class CameraMove : MonoBehaviour
     {
