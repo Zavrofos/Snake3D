@@ -1,8 +1,10 @@
+using System.Collections.Generic;
+using Prototype.Scripts.Snake;
 using UnityEngine;
 
 namespace Prototype.Scripts
 {
-    public class Movement : MonoBehaviour
+    public class SnakeHeadMovement : MonoBehaviour
     {
         [SerializeField] private Transform _apple;
         [SerializeField] private Transform _surfaceForMovement;
@@ -14,9 +16,11 @@ namespace Prototype.Scripts
         private float _vertical;
         private float _horizontal;
         private Vector2 _direction;
+        private Vector3 _previousPosition;
 
-        public Transform Player;
+        public Transform MovingObjectOnAnApple;
         public TouchInput Touch;
+        public BodySnake BodySnake;
         
         private void Start()
         {
@@ -25,6 +29,8 @@ namespace Prototype.Scripts
 
         private void FixedUpdate()
         {
+            _previousPosition = MovingObjectOnAnApple.position;
+
             var position = _rigidbody.position;
             var rayDirection = _surfaceForMovement.position - position;
 
@@ -39,14 +45,14 @@ namespace Prototype.Scripts
             if (Physics.Raycast(ray, out var hit1, rayDirection.magnitude, _appleLayerMask))
             {
                 var upDirection = -rayDirection.normalized;
-                Player.position = hit1.point + upDirection;
-                Player.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * Player.rotation;
+                MovingObjectOnAnApple.position = hit1.point + upDirection;
+                MovingObjectOnAnApple.rotation = Quaternion.FromToRotation(transform.up, hit1.normal) * MovingObjectOnAnApple.rotation;
             }
-
+            BodySnake.UpdateGame(_previousPosition);
+            
 
             var transform1 = transform;
             var forward = transform1.forward * _direction.y;
-            Debug.Log(forward);
             var right = transform1.right * _direction.x;
             _rigidbody.velocity = (forward + right) * _speedMovement;
 
