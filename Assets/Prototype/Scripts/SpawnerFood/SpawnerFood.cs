@@ -30,7 +30,7 @@ namespace Prototype.Scripts.SpawnerFood
             {
                 position = GetRandomPosition();
             } while (IsThereFoodNearby(position));
-            Food food = Instantiate(_foodPrefab, position, Quaternion.identity);
+            Food food = Instantiate(_foodPrefab, position, Quaternion.identity, transform);
         }
 
         private bool IsThereFoodNearby(Vector3 position)
