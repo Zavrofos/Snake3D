@@ -7,6 +7,7 @@ namespace Prototype.Scripts.Snake
     public class BodySnake : MonoBehaviour
     {
         public List<PartOfBodySnake> Body;
+        public PartOfBodySnake PartOfBodySnakePrefab;
 
         public void UpdateGameNew(List<PositionAndRotationHolder> oldHeadPositions)
         {
@@ -24,6 +25,12 @@ namespace Prototype.Scripts.Snake
                     part.Move();
                 }
             }
+        }
+
+        public void SpawnPartOfBodySnake()
+        {
+            PartOfBodySnake partOfBodySnake = Instantiate(PartOfBodySnakePrefab, transform);
+            Body.Add(partOfBodySnake);
         }
     }
 }
