@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
-namespace Prototype
+namespace Prototype.Scripts.Touch
 {
     public class TouchInput : MonoBehaviour
     {
@@ -11,7 +11,7 @@ namespace Prototype
         [SerializeField]
         private FloatingJoystick Joystick;
 
-        private Finger MovementFinger;
+        private Finger _movementFinger;
         public Vector2 Direction;
         public Vector2 PreviousPosition;
 
@@ -33,7 +33,7 @@ namespace Prototype
 
         private void HandleFingerMove(Finger MovedFinger)
         {
-            if (MovedFinger == MovementFinger)
+            if (MovedFinger == _movementFinger)
             {
                 Vector2 knobPosition;
                 float maxMovement = JoystickSize.x / 2f;
@@ -59,9 +59,9 @@ namespace Prototype
 
         private void HandleLoseFinger(Finger LostFinger)
         {
-            if (LostFinger == MovementFinger)
+            if (LostFinger == _movementFinger)
             {
-                MovementFinger = null;
+                _movementFinger = null;
                 Joystick.Knob.anchoredPosition = Vector2.zero;
                 Joystick.gameObject.SetActive(false);
                 //Direction = Vector2.zero;
@@ -70,9 +70,9 @@ namespace Prototype
 
         private void HandleFingerDown(Finger TouchedFinger)
         {
-            if (MovementFinger == null)
+            if (_movementFinger == null)
             {
-                MovementFinger = TouchedFinger;
+                _movementFinger = TouchedFinger;
                 Direction = Vector2.zero;
                 Joystick.gameObject.SetActive(true);
                 Joystick.RectTransform.sizeDelta = JoystickSize;
