@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Prototype.Scripts.SpawnerFood
+namespace Prototype.Scripts.SpawnerFoodFolder
 {
     public class SpawnerFood : MonoBehaviour
     {
