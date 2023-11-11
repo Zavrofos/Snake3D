@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Prototype.Scripts.Snake;
+using Prototype.Scripts.Touch;
 using UnityEngine;
 
 namespace Prototype.Scripts
@@ -12,25 +13,30 @@ namespace Prototype.Scripts
         [SerializeField] private LayerMask _surfaceLayerMask;
         [SerializeField] private float _speedMovement;
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private LerpDirection LerpDirection;
 
         private float _vertical;
         private float _horizontal;
         private Vector2 _direction;
-        private Vector3 _previousPosition;
 
         public Transform MovingObjectOnAnApple;
         public TouchInput Touch;
         public BodySnake BodySnake;
+        public Transform DirectionPoint;
         
+        private List<PositionAndRotationHolder> _positionsAndRotations;
+        private List<PositionAndRotationHolder> _previousPositionsAndRotations;
+
+        public Transform Head;
+
         private void Start()
         {
-            _direction = transform.forward;
+            _positionsAndRotations = new List<PositionAndRotationHolder>();
+            _previousPositionsAndRotations = new List<PositionAndRotationHolder>();
         }
 
         private void FixedUpdate()
         {
-            _previousPosition = MovingObjectOnAnApple.position;
-
             var position = _rigidbody.position;
             var rayDirection = _surfaceForMovement.position - position;
 
@@ -44,16 +50,25 @@ namespace Prototype.Scripts
 
             if (Physics.Raycast(ray, out var hit1, rayDirection.magnitude, _appleLayerMask))
             {
-                var upDirection = -rayDirection.normalized;
+                var upDirection = -rayDirection.normalized * 0.5f;
                 MovingObjectOnAnApple.position = hit1.point + upDirection;
-                MovingObjectOnAnApple.rotation = Quaternion.FromToRotation(transform.up, hit1.normal) * MovingObjectOnAnApple.rotation;
+                MovingObjectOnAnApple.rotation = Quaternion.FromToRotation(-transform.up, rayDirection) * MovingObjectOnAnApple.rotation;
             }
-            BodySnake.UpdateGame(_previousPosition);
             
-
+            
+            _positionsAndRotations.Add(new PositionAndRotationHolder(MovingObjectOnAnApple.position, Head.rotation));
+            if (_positionsAndRotations.Count == 10)
+            {
+                _previousPositionsAndRotations = new List<PositionAndRotationHolder>(_positionsAndRotations);
+                _positionsAndRotations.Clear();
+            }
+            BodySnake.UpdateGameNew(_previousPositionsAndRotations);
+            
             var transform1 = transform;
-            var forward = transform1.forward * _direction.y;
-            var right = transform1.right * _direction.x;
+
+            var forward = transform1.forward * LerpDirection.Direction.y;
+            var right = transform1.right * LerpDirection.Direction.x;
+            
             _rigidbody.velocity = (forward + right) * _speedMovement;
 
             Debug.DrawRay(transform1.position, -transform1.up * 5, Color.green);
