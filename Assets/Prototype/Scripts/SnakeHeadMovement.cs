@@ -7,7 +7,6 @@ namespace Prototype.Scripts
 {
     public class SnakeHeadMovement : MonoBehaviour
     {
-        [SerializeField] private Transform _apple;
         [SerializeField] private Transform _surfaceForMovement;
         [SerializeField] private LayerMask _appleLayerMask;
         [SerializeField] private LayerMask _surfaceLayerMask;
@@ -17,13 +16,10 @@ namespace Prototype.Scripts
 
         private float _vertical;
         private float _horizontal;
-        private Vector2 _direction;
 
         public Transform MovingObjectOnAnApple;
-        public TouchInput Touch;
         public BodySnake BodySnake;
-        public Transform DirectionPoint;
-        
+
         private List<PositionAndRotationHolder> _positionsAndRotations;
         private List<PositionAndRotationHolder> _previousPositionsAndRotations;
 
@@ -55,7 +51,6 @@ namespace Prototype.Scripts
                 MovingObjectOnAnApple.rotation = Quaternion.FromToRotation(-transform.up, rayDirection) * MovingObjectOnAnApple.rotation;
             }
             
-            
             _positionsAndRotations.Add(new PositionAndRotationHolder(MovingObjectOnAnApple.position, Head.rotation));
             if (_positionsAndRotations.Count == 10)
             {
@@ -65,25 +60,10 @@ namespace Prototype.Scripts
             BodySnake.UpdateGameNew(_previousPositionsAndRotations);
             
             var transform1 = transform;
-
             var forward = transform1.forward * LerpDirection.Direction.y;
             var right = transform1.right * LerpDirection.Direction.x;
             
             _rigidbody.velocity = (forward + right) * _speedMovement;
-
-            Debug.DrawRay(transform1.position, -transform1.up * 5, Color.green);
-        }
-
-        private void Update()
-        {
-            _vertical = Touch.Direction.y;
-            _horizontal = Touch.Direction.x;
-
-            if (_vertical == 0 && _horizontal == 0)
-                return;
-
-            var direction = new Vector2(_horizontal, _vertical).normalized;
-            _direction = direction;
         }
     }
 }
