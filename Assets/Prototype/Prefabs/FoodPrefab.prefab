@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8087270995073819992}
   - component: {fileID: 6151126729697929408}
   - component: {fileID: 147260221401629272}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FoodPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

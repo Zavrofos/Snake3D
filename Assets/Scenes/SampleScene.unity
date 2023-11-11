@@ -1986,10 +1986,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce98d0c8e6234784a7021da55208222d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialCountFood: 50
   _appleLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  _foodLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   _foodPrefab: {fileID: 147260221401629272, guid: 2735ff2939398194483fbe685fa0e316, type: 3}
 --- !u!4 &1920654226
 Transform:
