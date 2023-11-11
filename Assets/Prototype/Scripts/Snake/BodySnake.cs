@@ -7,22 +7,21 @@ namespace Prototype.Scripts.Snake
     public class BodySnake : MonoBehaviour
     {
         public List<PartOfBodySnake> Body;
-        public PartOfBodySnake PartOfBodyPrefab;
 
-        public void UpdateGame(Vector3 previousSnakeHeadPosition)
+        public void UpdateGameNew(List<PositionAndRotationHolder> oldHeadPositions)
         {
             for (var i = 0; i < Body.Count; i++)
             {
                 var part = Body[i];
-                var partTransform = part.transform;
-                part.PreviousPosition = partTransform.position;
                 if (i == 0)
                 {
-                    partTransform.position = previousSnakeHeadPosition;
+                    part.PositionsAndRotations = oldHeadPositions;
+                    part.Move();
                 }
                 else
                 {
-                    partTransform.position = Body[i - 1].PreviousPosition;
+                    part.PositionsAndRotations = Body[i - 1].OldPositionsAndRotations;
+                    part.Move();
                 }
             }
         }
