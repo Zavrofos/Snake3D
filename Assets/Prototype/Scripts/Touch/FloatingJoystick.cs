@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Prototype
+namespace Prototype.Scripts.Touch
 {
     [RequireComponent(typeof(RectTransform))]
     [DisallowMultipleComponent]
