@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Snake
+namespace Snake.MoveController
 {
     public class MovementController
     {

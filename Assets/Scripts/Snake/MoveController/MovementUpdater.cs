@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts;
 using UnityEngine;
 
-namespace Snake
+namespace Snake.MoveController
 {
     public class MovementUpdater : IUpdater
     {
