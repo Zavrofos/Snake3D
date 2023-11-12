@@ -6,6 +6,7 @@ namespace Prototype.Scripts.Snake
     {
         public Vector3 Position;
         public Quaternion Rotation;
+        public bool IsEatedFood = false;
 
         public PositionAndRotationHolder(Vector3 position, Quaternion rotation)
         {
