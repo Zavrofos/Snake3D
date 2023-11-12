@@ -16,7 +16,8 @@ public class StarterGame : MonoBehaviour
     private List<IPresenter> _presenters;
     private List<IUpdater> _updaters;
 
-    private void Start()
+
+    private void Awake()
     {
         GameModel = new GameModel(InitialCountoartOfBodySnake, JoystickSize);
         
