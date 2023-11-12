@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Snake
 {
-    public class MovementUpdater : IFixedUpdater
+    public class MovementUpdater : IUpdater
     {
         private GameModel _gameModel;
         private GameView _gameView;
@@ -14,7 +14,7 @@ namespace Snake
             _gameView = gameView;
         }
         
-        public void FixedUpdate()
+        public void Update()
         {
             var position = _gameView.MovementController.Rigb.position;
             var rayDirection = _gameView.SurfaceForMovement.position - position;
@@ -33,7 +33,7 @@ namespace Snake
             
             _gameView.MovementController.Rigb.velocity = (forward + right) * _gameModel.MovementController.SpeedSnake;
 
-            _gameModel.MovementController.Position = position;
+            _gameModel.MovementController.Position = _gameView.MovementController.transform.position;
         }
     }
 }
