@@ -1,16 +1,19 @@
-﻿namespace Snake
+﻿using Snake.Body;
+using Snake.Head;
+
+namespace Snake
 {
     public class SnakeModel
     {
-        private int InitialCountPartOfBody;
+        public readonly int InitialCountPartOfBody;
         public SnakeHeadModel Head;
         public BodySnakeModel Body;
 
-        public SnakeModel(int initialCountPartOfBody)
+        public SnakeModel(int initialCountPartOfBody, int gapBetweenPositionsOfBodyParts)
         {
             InitialCountPartOfBody = initialCountPartOfBody;
             Head = new SnakeHeadModel();
-            Body = new BodySnakeModel();
+            Body = new BodySnakeModel(gapBetweenPositionsOfBodyParts);
         }
     }
 }

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using Assets.Scripts;
 using Camera;
 using Snake;
+using Snake.Body;
+using Snake.Head;
+using Snake.MoveController;
 using Touch;
 using UnityEngine;
 
@@ -17,6 +20,7 @@ public class StarterGame : MonoBehaviour
     public float SpeedLerpDirection;
     public float SpeedSnake;
     public float CameraDistance;
+    public int GapBetweenPositionsOfBodyParts;
 
     private List<IPresenter> _presenters;
     private List<IUpdater> _updaters;
@@ -27,11 +31,13 @@ public class StarterGame : MonoBehaviour
     private void Awake()
     {
         GameModel = new GameModel(InitialCountPartOfBodySnake, JoystickSize, SpeedLerpDirection,
-            SpeedSnake, CameraDistance);
+            SpeedSnake, CameraDistance, GapBetweenPositionsOfBodyParts);
         
         _presenters = new List<IPresenter>()
         {
-            new TouchInputPresenter(GameModel, GameView)
+            new TouchInputPresenter(GameModel, GameView),
+            new InitializeBodySnakePresenter(GameModel, GameView),
+            new CreatePartOfBodyPresenter(GameModel, GameView)
         };
         
         _updaters = new List<IUpdater>()
@@ -43,13 +49,21 @@ public class StarterGame : MonoBehaviour
         _fixedUpdaters = new List<IUpdater>()
         {
             new MovementUpdater(GameModel, GameView),
-            new SnakeHeadMoveUpdater(GameModel, GameView)
+            new SnakeHeadMoveUpdater(GameModel, GameView),
+            new BodyMoveUpdater(GameModel, GameView)
         };
 
         _lateUpdaters = new List<IUpdater>()
         {
             new CameraMoveUpdater(GameModel, GameView)
         };
+        
+        
+    }
+
+    private void Start()
+    {
+        GameModel.Initialize();
     }
 
     private void Update()

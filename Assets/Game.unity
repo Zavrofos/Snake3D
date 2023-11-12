@@ -349,6 +349,7 @@ MonoBehaviour:
   MovementController: {fileID: 1329252528}
   SnakeHeadView: {fileID: 1606121131}
   CameraView: {fileID: 1012566762}
+  BodySnakeView: {fileID: 1817564397}
 --- !u!1 &299346057
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,6 +379,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1606121130}
+  - {fileID: 1817564396}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -589,11 +591,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameView: {fileID: 291833463}
-  InitialCountPartOfBodySnake: 3
+  InitialCountPartOfBodySnake: 20
   JoystickSize: {x: 100, y: 100}
   SpeedLerpDirection: 10
   SpeedSnake: 20
   CameraDistance: 80
+  GapBetweenPositionsOfBodyParts: 5
 --- !u!1 &1012566759
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,7 +833,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1329252524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f153a31b3ef4c21b15757b7623d355c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e351a76378d43c3959fcd4cd6e1b892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Rigb: {fileID: 1329252529}
@@ -892,7 +895,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1606121129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 102f9f87a5cc4771beb6eb14d2c81101, type: 3}
+  m_Script: {fileID: 11500000, guid: 90a243c3726c46f58cb1067bf9bf2764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Head: {fileID: 1730498758}
@@ -901,6 +904,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6728937169722051123, guid: 78bfda5e430071b4a82ddb7926f5003c, type: 3}
   m_PrefabInstance: {fileID: 1248494038}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1817564395
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1817564396}
+  - component: {fileID: 1817564397}
+  m_Layer: 0
+  m_Name: SnakeBody
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1817564396
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817564395}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 299346058}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1817564397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817564395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e379114fad642dfa1bddfa830183991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PartOfBodySnakePrefab: {fileID: 2084003857772874475, guid: 3586c10af2aae46449456725236f8161, type: 3}
+  PartsOfBodySnake: []
 --- !u!1 &2115545840
 GameObject:
   m_ObjectHideFlags: 0

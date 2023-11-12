@@ -1,5 +1,8 @@
 ﻿using System.Collections;
 using Snake;
+using Snake.Body;
+using Snake.Head;
+using Snake.MoveController;
 using Touch;
 using UnityEngine;
 
@@ -10,4 +13,5 @@ public class GameView : MonoBehaviour
     public MovementControllerView MovementController;
     public SnakeHeadView SnakeHeadView;
     public Transform CameraView;
+    public BodySnakeView BodySnakeView;
 }
