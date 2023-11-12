@@ -31,7 +31,6 @@ namespace Prototype.Scripts.Snake
                 if (Vector3.Distance(transform.position, part.transform.position) < 0.5)
                 {
                     Destroy(part.gameObject);
-                    // _bodySnake.SpawnPartOfBodySnake();
                     _bodySnake.isEatedFood = true;
                     _spawnerFood.SpawnFood();
                 }

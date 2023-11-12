@@ -46,8 +46,6 @@ namespace Prototype.Scripts.Touch
                     toDegreesAngle += 360;
             }
 
-            Debug.Log($"from = {fromDegreeAngle}, to = {toDegreesAngle}");
-            
             Angle = fromDegreeAngle * Mathf.Deg2Rad;
             _toAngle = toDegreesAngle * Mathf.Deg2Rad;
             

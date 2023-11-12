@@ -520,7 +520,8 @@ MonoBehaviour:
   - {fileID: 2003651244}
   - {fileID: 1924507963}
   PartOfBodySnakePrefab: {fileID: 765575013527733770, guid: f6251ebba3690f44f92f17dbb663bb71, type: 3}
-  Gap: 10
+  Gap: 5
+  isEatedFood: 0
 --- !u!4 &816855452
 Transform:
   m_ObjectHideFlags: 0
@@ -922,19 +923,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6728937169722051123, guid: e58e828e68e6abf4db601dac0b84b512, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6728937169722051123, guid: e58e828e68e6abf4db601dac0b84b512, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6728937169722051123, guid: e58e828e68e6abf4db601dac0b84b512, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6728937169722051123, guid: e58e828e68e6abf4db601dac0b84b512, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6728937169722051123, guid: e58e828e68e6abf4db601dac0b84b512, type: 3}
       propertyPath: m_LocalPosition.x
