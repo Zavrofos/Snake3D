@@ -12,6 +12,7 @@ public class StarterGame : MonoBehaviour
     
     public int InitialCountoartOfBodySnake;
     public Vector2 JoystickSize;
+    public float SpeedLerpDirection;
 
     private List<IPresenter> _presenters;
     private List<IUpdater> _updaters;
@@ -19,7 +20,7 @@ public class StarterGame : MonoBehaviour
 
     private void Awake()
     {
-        GameModel = new GameModel(InitialCountoartOfBodySnake, JoystickSize);
+        GameModel = new GameModel(InitialCountoartOfBodySnake, JoystickSize, SpeedLerpDirection);
         
         _presenters = new List<IPresenter>()
         {
@@ -28,7 +29,7 @@ public class StarterGame : MonoBehaviour
         
         _updaters = new List<IUpdater>()
         {
-
+            new LerpDirectionUpdater(GameModel)
         };
     }
 
@@ -38,6 +39,7 @@ public class StarterGame : MonoBehaviour
         {
             updater.Update();
         }
+        Debug.Log(GameModel.TouchModel.TouchDirection + " -------------- " + GameModel.TouchModel.LerpDirection);
     }
 
     private void OnEnable()

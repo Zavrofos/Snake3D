@@ -5,11 +5,15 @@ namespace Touch
     public class TouchModel
     {
         public readonly Vector2 JoystickSize;
-        public Vector2 Direction;
+        public readonly float SpeedLerpDirection;
+        public Vector2 TouchDirection;
+        public Vector2 LerpDirection;
+        public float LerpAngle;
 
-        public TouchModel(Vector2 joystickSize)
+        public TouchModel(Vector2 joystickSize, float speedLerpDirection)
         {
             JoystickSize = joystickSize;
+            SpeedLerpDirection = speedLerpDirection;
         }
     }
 }
