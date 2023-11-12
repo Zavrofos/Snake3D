@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Snake
+namespace Snake.Head
 {
     public class SnakeHeadView : MonoBehaviour
     {
