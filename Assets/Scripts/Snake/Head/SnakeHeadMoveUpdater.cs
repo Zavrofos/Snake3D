@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts;
 using UnityEngine;
 
-namespace Snake
+namespace Snake.Head
 {
     public class SnakeHeadMoveUpdater : IUpdater
     {
@@ -27,7 +27,7 @@ namespace Snake
                 _gameView.SnakeHeadView.transform.rotation = Quaternion.FromToRotation(-_gameView.MovementController.transform.up, rayDirection) * _gameView.SnakeHeadView.transform.rotation;
 
                 _gameModel.SnakeModel.Head.Position = _gameView.SnakeHeadView.transform.position;
-                _gameModel.SnakeModel.Head.Rotation = _gameView.SnakeHeadView.transform.rotation;
+                _gameModel.SnakeModel.Head.Rotation = _gameView.SnakeHeadView.Head.transform.rotation;
             }
         }
     }
