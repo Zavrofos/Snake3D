@@ -1,10 +1,8 @@
 ﻿using System.Collections;
+using Touch;
 using UnityEngine;
 
-namespace Assets.Scripts
+public class GameView : MonoBehaviour
 {
-    public class GameView : MonoBehaviour
-    {
-        
-    }
+    public FloatingJoystickView JoystickView;
 }
