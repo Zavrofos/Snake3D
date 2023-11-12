@@ -520,6 +520,7 @@ MonoBehaviour:
   - {fileID: 2003651244}
   - {fileID: 1924507963}
   PartOfBodySnakePrefab: {fileID: 765575013527733770, guid: f6251ebba3690f44f92f17dbb663bb71, type: 3}
+  Gap: 10
 --- !u!4 &816855452
 Transform:
   m_ObjectHideFlags: 0

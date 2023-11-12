@@ -19,18 +19,9 @@ namespace Prototype.Scripts
 
         public Transform MovingObjectOnAnApple;
         public BodySnake BodySnake;
-
-        private List<PositionAndRotationHolder> _positionsAndRotations;
-        private List<PositionAndRotationHolder> _previousPositionsAndRotations;
-
+        
         public Transform Head;
-
-        private void Start()
-        {
-            _positionsAndRotations = new List<PositionAndRotationHolder>();
-            _previousPositionsAndRotations = new List<PositionAndRotationHolder>();
-        }
-
+        
         private void FixedUpdate()
         {
             var position = _rigidbody.position;
@@ -51,13 +42,7 @@ namespace Prototype.Scripts
                 MovingObjectOnAnApple.rotation = Quaternion.FromToRotation(-transform.up, rayDirection) * MovingObjectOnAnApple.rotation;
             }
             
-            _positionsAndRotations.Add(new PositionAndRotationHolder(MovingObjectOnAnApple.position, Head.rotation));
-            if (_positionsAndRotations.Count == 10)
-            {
-                _previousPositionsAndRotations = new List<PositionAndRotationHolder>(_positionsAndRotations);
-                _positionsAndRotations.Clear();
-            }
-            BodySnake.UpdateGameNew(_previousPositionsAndRotations);
+            BodySnake.UpdateGame(new PositionAndRotationHolder(MovingObjectOnAnApple.transform.position, Head.rotation));
             
             var transform1 = transform;
             var forward = transform1.forward * LerpDirection.Direction.y;

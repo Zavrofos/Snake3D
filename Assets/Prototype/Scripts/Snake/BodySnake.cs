@@ -8,22 +8,17 @@ namespace Prototype.Scripts.Snake
     {
         public List<PartOfBodySnake> Body;
         public PartOfBodySnake PartOfBodySnakePrefab;
-
-        public void UpdateGameNew(List<PositionAndRotationHolder> oldHeadPositions)
+        public int Gap = 100;
+        
+        public void UpdateGame(PositionAndRotationHolder holder)
         {
-            for (var i = 0; i < Body.Count; i++)
+            var nextHolder = holder;
+
+            for (int i = 0; i < Body.Count; i++)
             {
-                var part = Body[i];
-                if (i == 0)
-                {
-                    part.PositionsAndRotations = oldHeadPositions;
-                    part.Move();
-                }
-                else
-                {
-                    part.PositionsAndRotations = Body[i - 1].OldPositionsAndRotations;
-                    part.Move();
-                }
+                Body[i].History.Enqueue(nextHolder);
+                nextHolder = Body[i].Move(Gap);
+                if (nextHolder == null) return;
             }
         }
 

@@ -7,22 +7,17 @@ namespace Prototype.Scripts.Snake
 {
     public class PartOfBodySnake : MonoBehaviour
     {
-        public List<PositionAndRotationHolder> PositionsAndRotations;
-        public List<PositionAndRotationHolder> OldPositionsAndRotations;
-        private int _currentPositionIndex;
-        
-        public void Move()
+        public Queue<PositionAndRotationHolder> History = new();
+
+        public PositionAndRotationHolder Move(int gap)
         {
-            if (PositionsAndRotations == null || PositionsAndRotations.Count == 0) return;
+            if (History.Count < gap)
+                return null;
 
-            var transform1 = transform;
-            transform1.position = PositionsAndRotations[_currentPositionIndex].Position;
-            transform1.rotation = PositionsAndRotations[_currentPositionIndex].Rotation;
-            _currentPositionIndex++;
-
-            if (_currentPositionIndex != PositionsAndRotations.Count) return;
-            OldPositionsAndRotations = new List<PositionAndRotationHolder>(PositionsAndRotations);
-            _currentPositionIndex = 0;
+            PositionAndRotationHolder holder = History.Dequeue();
+            transform.position = holder.Position;
+            transform.rotation = holder.Rotation;
+            return holder;
         }
     }
 }
