@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts;
 using UnityEngine;
 
-namespace Snake
+namespace Snake.Head
 {
     public class RotationSnakeHeadUpdater : IUpdater
     {
