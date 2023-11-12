@@ -5,4 +5,5 @@ using UnityEngine;
 public class GameView : MonoBehaviour
 {
     public FloatingJoystickView JoystickView;
+    public Transform SurfaceForMovement;
 }

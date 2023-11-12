@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JoystickView: {fileID: 2133388665}
+  SurfaceForMovement: {fileID: 2115545844}
 --- !u!1 &482078010
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +556,7 @@ MonoBehaviour:
   GameView: {fileID: 291833463}
   InitialCountoartOfBodySnake: 3
   JoystickSize: {x: 100, y: 100}
+  SpeedLerpDirection: 10
 --- !u!1 &1012566759
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,7 +654,7 @@ GameObject:
   - component: {fileID: 2115545843}
   - component: {fileID: 2115545842}
   - component: {fileID: 2115545841}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SurfaceForMovement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -733,7 +735,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4274633673613152315}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -898,7 +901,7 @@ GameObject:
   - component: {fileID: 380885565545102026}
   - component: {fileID: 5072638728878465912}
   - component: {fileID: 433273168342655247}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Apple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -915,7 +918,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4274633673613152315}
   - component: {fileID: 4274633673613152316}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Apple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,14 +932,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3465902547704924801}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 380885565545102026}
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 2115545844}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &4274633673613152316
 MeshCollider:
