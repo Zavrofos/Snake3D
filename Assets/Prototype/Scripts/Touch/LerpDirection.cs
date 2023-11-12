@@ -8,7 +8,7 @@ namespace Prototype.Scripts.Touch
         public TouchInput Touch;
         public Vector2 Direction;
         
-        [SerializeField] private float Speed;
+        [SerializeField] private float SpeedLerpDirection;
 
         private float _toAngle;
         public float Angle;
@@ -49,7 +49,7 @@ namespace Prototype.Scripts.Touch
             Angle = fromDegreeAngle * Mathf.Deg2Rad;
             _toAngle = toDegreesAngle * Mathf.Deg2Rad;
             
-            Angle = Mathf.Lerp(Angle, _toAngle, Time.deltaTime * Speed);
+            Angle = Mathf.Lerp(Angle, _toAngle, Time.deltaTime * SpeedLerpDirection);
             Direction = new Vector2(Mathf.Sin(Angle), Mathf.Cos(Angle));
         }
     }
