@@ -36,7 +36,8 @@ public class StarterGame : MonoBehaviour
         
         _updaters = new List<IUpdater>()
         {
-            new LerpDirectionUpdater(GameModel)
+            new LerpDirectionUpdater(GameModel),
+            new RotationSnakeHeadUpdater(GameModel, GameView)
         };
 
         _fixedUpdaters = new List<IUpdater>()
