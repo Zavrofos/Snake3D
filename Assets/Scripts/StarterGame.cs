@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts;
+using Camera;
 using Snake;
 using Touch;
 using UnityEngine;
@@ -15,16 +16,18 @@ public class StarterGame : MonoBehaviour
     public Vector2 JoystickSize;
     public float SpeedLerpDirection;
     public float SpeedSnake;
+    public float CameraDistance;
 
     private List<IPresenter> _presenters;
     private List<IUpdater> _updaters;
-    private List<IFixedUpdater> _fixedUpdaters;
+    private List<IUpdater> _fixedUpdaters;
+    private List<IUpdater> _lateUpdaters;
 
 
     private void Awake()
     {
         GameModel = new GameModel(InitialCountPartOfBodySnake, JoystickSize, SpeedLerpDirection,
-            SpeedSnake);
+            SpeedSnake, CameraDistance);
         
         _presenters = new List<IPresenter>()
         {
@@ -36,9 +39,15 @@ public class StarterGame : MonoBehaviour
             new LerpDirectionUpdater(GameModel)
         };
 
-        _fixedUpdaters = new List<IFixedUpdater>()
+        _fixedUpdaters = new List<IUpdater>()
         {
-            new MovementUpdater(GameModel, GameView)
+            new MovementUpdater(GameModel, GameView),
+            new SnakeHeadMoveUpdater(GameModel, GameView)
+        };
+
+        _lateUpdaters = new List<IUpdater>()
+        {
+            new CameraMoveUpdater(GameModel, GameView)
         };
     }
 
@@ -54,7 +63,15 @@ public class StarterGame : MonoBehaviour
     {
         foreach (var fixedUpdater in _fixedUpdaters)
         {
-            fixedUpdater.FixedUpdate();
+            fixedUpdater.Update();
+        }
+    }
+
+    private void LateUpdate()
+    {
+        foreach (var lateUpdater in _lateUpdaters)
+        {
+            lateUpdater.Update();
         }
     }
 

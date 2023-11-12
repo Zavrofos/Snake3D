@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Prototype.Scripts.Touch
 {
-    public class LerpDirection : MonoBehaviour
+    public class LerpDirection : MonoBehaviour // перенесено 
     {
         public TouchInput Touch;
         public Vector2 Direction;
