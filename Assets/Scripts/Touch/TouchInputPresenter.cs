@@ -55,7 +55,7 @@ namespace Touch
 
                 if(knobPosition != Vector2.zero)
                 {
-                    _gameModel.TouchModel.Direction = knobPosition / maxMovement;
+                    _gameModel.TouchModel.TouchDirection = knobPosition / maxMovement;
                 }
             }
         }
@@ -75,7 +75,7 @@ namespace Touch
             if (_movementFinger == null)
             {
                 _movementFinger = TouchedFinger;
-                _gameModel.TouchModel.Direction = Vector2.zero;
+                _gameModel.TouchModel.TouchDirection = Vector2.zero;
                 _gameView.JoystickView.gameObject.SetActive(true);
                 _gameView.JoystickView.RectTransform.sizeDelta = _gameModel.TouchModel.JoystickSize;
                 _gameView.JoystickView.RectTransform.anchoredPosition = ClampStartPosition(TouchedFinger.screenPosition);
