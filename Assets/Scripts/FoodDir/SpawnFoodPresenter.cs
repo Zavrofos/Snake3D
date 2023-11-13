@@ -7,6 +7,7 @@ namespace FoodDir
     {
         private GameModel _gameModel;
         private GameView _gameView;
+        private int _countId;
 
         public SpawnFoodPresenter(GameModel gameModel, GameView gameView)
         {
@@ -31,7 +32,13 @@ namespace FoodDir
             {
                 position = GetRandomPosition();
             } while (IsThereFoodNearby(position));
-            FoodView food = GameObject.Instantiate(_gameView.SpawnFoodView.FoodPrefab, position, Quaternion.identity, _gameView.SpawnFoodView.transform);
+
+            FoodModel foodModel = new FoodModel(_countId);
+            _gameModel.SpawnFoodModel.ActiveFood.Add(_countId, foodModel);
+            FoodView foodView = GameObject.Instantiate(_gameView.SpawnFoodView.FoodPrefab, position, Quaternion.identity, _gameView.SpawnFoodView.transform);
+            foodView.Id = _countId;
+            _gameView.SpawnFoodView.ActiveFoodView.Add(_countId, foodView);
+            _countId++;
         }
 
         private bool IsThereFoodNearby(Vector3 position)

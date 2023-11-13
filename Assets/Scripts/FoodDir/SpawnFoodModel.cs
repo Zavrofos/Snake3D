@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FoodDir
 {
@@ -7,6 +8,7 @@ namespace FoodDir
         public readonly int InitialCountFood;
         public readonly float RadiusCheckNearFood = 5;
         public readonly int LengthRayForSpawnFood = 50;
+        public Dictionary<int, FoodModel> ActiveFood = new();
 
         public event Action SpawnedFood;
 
