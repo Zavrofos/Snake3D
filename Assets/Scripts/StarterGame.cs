@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts;
 using Camera;
+using FoodDir;
 using Snake;
 using Snake.Body;
 using Snake.Head;
@@ -38,7 +39,8 @@ public class StarterGame : MonoBehaviour
         {
             new TouchInputPresenter(GameModel, GameView),
             new InitializeBodySnakePresenter(GameModel, GameView),
-            new CreatePartOfBodyPresenter(GameModel, GameView)
+            new CreatePartOfBodyPresenter(GameModel, GameView),
+            new InitialSpawnFoodPresenter(GameModel, GameView)
         };
         
         _updaters = new List<IUpdater>()
