@@ -592,13 +592,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameView: {fileID: 291833463}
-  InitialCountPartOfBodySnake: 20
+  InitialCountPartOfBodySnake: 3
   JoystickSize: {x: 100, y: 100}
   SpeedLerpDirection: 10
   SpeedSnake: 20
   CameraDistance: 80
   GapBetweenPositionsOfBodyParts: 5
   InitialCountFood: 30
+  SpeedFood: 20
+  RadiusFindFood: 3
 --- !u!1 &1012566759
 GameObject:
   m_ObjectHideFlags: 0

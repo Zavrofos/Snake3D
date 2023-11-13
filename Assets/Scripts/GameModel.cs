@@ -20,10 +20,10 @@ public class GameModel
     
     public GameModel(int initialCountPartOfBody, Vector2 joystickSize, float speedLerpDirection,
         float speedSnake, float distanceCamera, int gapBetweenPositionsOfBodyParts, int initialCountFood, 
-        float speedFood)
+        float speedFood, float radiusFindFood)
     {
         TouchModel = new TouchModel(joystickSize, speedLerpDirection);
-        SnakeModel = new SnakeModel(initialCountPartOfBody, gapBetweenPositionsOfBodyParts);
+        SnakeModel = new SnakeModel(initialCountPartOfBody, gapBetweenPositionsOfBodyParts, radiusFindFood);
         MovementController = new MovementController(speedSnake);
         CameraModel = new CameraModel(distanceCamera);
         SpawnFoodModel = new SpawnFoodModel(initialCountFood, speedFood);

@@ -9,10 +9,10 @@ namespace Snake
         public SnakeHeadModel Head;
         public BodySnakeModel Body;
 
-        public SnakeModel(int initialCountPartOfBody, int gapBetweenPositionsOfBodyParts)
+        public SnakeModel(int initialCountPartOfBody, int gapBetweenPositionsOfBodyParts, float radiusFindFood)
         {
             InitialCountPartOfBody = initialCountPartOfBody;
-            Head = new SnakeHeadModel();
+            Head = new SnakeHeadModel(radiusFindFood);
             Body = new BodySnakeModel(gapBetweenPositionsOfBodyParts);
         }
     }
