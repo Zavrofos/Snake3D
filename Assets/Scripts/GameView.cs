@@ -1,10 +1,19 @@
 ﻿using System.Collections;
+using FoodDir;
+using Snake;
+using Snake.Body;
+using Snake.Head;
+using Snake.MoveController;
+using Touch;
 using UnityEngine;
 
-namespace Assets.Scripts
+public class GameView : MonoBehaviour
 {
-    public class GameView : MonoBehaviour
-    {
-        
-    }
+    public FloatingJoystickView JoystickView;
+    public Transform SurfaceForMovement;
+    public MovementControllerView MovementController;
+    public SnakeHeadView SnakeHeadView;
+    public Transform CameraView;
+    public BodySnakeView BodySnakeView;
+    public SpawnFoodView SpawnFoodView;
 }
