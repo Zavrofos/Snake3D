@@ -8,11 +8,13 @@ namespace FoodDir
         private readonly GameModel _gameModel;
         private readonly GameView _gameView;
         private int _countId;
+        private readonly Collider[] _results;
 
-        public SpawnFoodPresenter(GameModel gameModel, GameView gameView)
+        public SpawnFoodPresenter(GameModel gameModel, GameView gameView, int maxFoodCollisionResultCount)
         {
             _gameModel = gameModel;
             _gameView = gameView;
+            _results = new Collider[maxFoodCollisionResultCount];
         }
         
         public void Subscribe()
@@ -27,28 +29,35 @@ namespace FoodDir
 
         private void OnSpawnFood()
         {
+            SpawnFoodView spawnFoodView = _gameView.SpawnFoodView;
+            SpawnFoodModel spawnFoodModel = _gameModel.SpawnFoodModel;
+            
             Vector3 position;
             do
             {
                 position = GetRandomPosition();
             } while (IsThereFoodNearby(position));
-
+            
             FoodModel foodModel = new FoodModel(_countId);
-            _gameModel.SpawnFoodModel.ActiveFood.Add(_countId, foodModel);
-            FoodView foodView = GameObject.Instantiate(_gameView.SpawnFoodView.FoodPrefab, position, Quaternion.identity, _gameView.SpawnFoodView.transform);
+            spawnFoodModel.ActiveFood.Add(_countId, foodModel);
+            FoodView foodView = GameObject.Instantiate(spawnFoodView.FoodPrefab, position, Quaternion.identity, spawnFoodView.transform);
             foodView.Id = _countId;
-            _gameView.SpawnFoodView.ActiveFoodView.Add(_countId, foodView);
+            spawnFoodView.ActiveFoodView.Add(_countId, foodView);
             _countId++;
         }
 
         private bool IsThereFoodNearby(Vector3 position)
         {
-            var foods = Physics.OverlapSphere(position, _gameModel.SpawnFoodModel.RadiusCheckNearFood, LayerMask.GetMask("Food"));
-            return foods.Length != 0;
+            SpawnFoodModel spawnFoodModel = _gameModel.SpawnFoodModel;
+            var size = Physics.OverlapSphereNonAlloc(position, spawnFoodModel.RadiusCheckNearFood, _results, LayerMask.GetMask("Food"));
+            return size != 0;
         }
 
         private Vector3 GetRandomPosition()
         {
+            SpawnFoodView spawnFoodView = _gameView.SpawnFoodView;
+            SpawnFoodModel spawnFoodModel = _gameModel.SpawnFoodModel;
+            
             float x = Random.Range(-1f, 1f);
             float y = Random.Range(-1f, 1f);
             float z = Random.Range(-1f, 1f);
@@ -57,10 +66,10 @@ namespace FoodDir
             
             var direction = new Vector3(x, y, z).normalized;
             
-            if (Physics.Raycast(_gameView.SpawnFoodView.transform.position + direction * 
-                    _gameModel.SpawnFoodModel.LengthRayForSpawnFood, -direction * 
-                    _gameModel.SpawnFoodModel.LengthRayForSpawnFood, 
-                    out var hit, _gameModel.SpawnFoodModel.LengthRayForSpawnFood, 
+            if (Physics.Raycast(spawnFoodView.transform.position + direction * 
+                    spawnFoodModel.LengthRayForSpawnFood, -direction * 
+                    spawnFoodModel.LengthRayForSpawnFood, 
+                    out var hit, spawnFoodModel.LengthRayForSpawnFood, 
                     LayerMask.GetMask("Apple")))
             {
                 return hit.point + direction;
