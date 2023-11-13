@@ -1,4 +1,5 @@
-﻿using Assets.Scripts;
+﻿using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
 
 namespace FoodDir
@@ -16,17 +17,25 @@ namespace FoodDir
         
         public void Update()
         {
+            List<FoodModel> removedFood = new();
+
             foreach (var foodModel in _gameModel.SpawnFoodModel.ActiveFood.Values)
             {
-                if (foodModel.CurrentStateFood != StateFood.MoveToHeadSnake) return;
+                if (foodModel.CurrentStateFood != StateFood.MoveToHeadSnake) continue;
+                
                 FoodView food = _gameView.SpawnFoodView.ActiveFoodView[foodModel.Id];
                 var direction = (_gameModel.SnakeModel.Head.Position - food.transform.position).normalized;
                 food.transform.Translate(direction * _gameModel.SpawnFoodModel.SpeedFood * Time.deltaTime);
                 
                 if (Vector3.Distance(food.transform.position, _gameModel.SnakeModel.Head.Position) < 0.5)
                 {
-                    _gameModel.SpawnFoodModel.RemoveFood(foodModel);
+                    removedFood.Add(foodModel);
                 }
+            }
+
+            foreach (var foodModel in removedFood)
+            {
+                _gameModel.SpawnFoodModel.RemoveFood(foodModel);
             }
         }
     }
