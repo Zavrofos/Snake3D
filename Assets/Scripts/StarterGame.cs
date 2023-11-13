@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Assets.Scripts;
+﻿using System.Collections.Generic;
 using Camera;
 using FoodDir;
-using Snake;
 using Snake.Body;
 using Snake.Head;
 using Snake.MoveController;
@@ -25,6 +21,7 @@ public class StarterGame : MonoBehaviour
     public int InitialCountFood;
     public float SpeedFood;
     public float RadiusFindFood;
+    public int MaxFoodCollisionResultCount;
 
     private List<IPresenter> _presenters;
     private List<IUpdater> _updaters;
@@ -43,7 +40,7 @@ public class StarterGame : MonoBehaviour
             new InitializeBodySnakePresenter(GameModel, GameView),
             new CreatePartOfBodyPresenter(GameModel, GameView),
             new InitialSpawnFoodPresenter(GameModel, GameView),
-            new SpawnFoodPresenter(GameModel, GameView),
+            new SpawnFoodPresenter(GameModel, GameView, MaxFoodCollisionResultCount),
             new RemoveFoodPresenter(GameModel, GameView)
         };
         
@@ -52,7 +49,7 @@ public class StarterGame : MonoBehaviour
             new LerpDirectionUpdater(GameModel),
             new RotationSnakeHeadUpdater(GameModel, GameView),
             new MoveFoodToHeadSnakeUpdater(GameModel, GameView),
-            new FindFoodUpdater(GameModel, GameView)
+            new FindFoodUpdater(GameModel, GameView, MaxFoodCollisionResultCount)
         };
 
         _fixedUpdaters = new List<IUpdater>()
@@ -66,8 +63,6 @@ public class StarterGame : MonoBehaviour
         {
             new CameraMoveUpdater(GameModel, GameView)
         };
-        
-        
     }
 
     private void Start()

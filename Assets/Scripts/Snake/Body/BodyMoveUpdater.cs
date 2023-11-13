@@ -1,12 +1,11 @@
-﻿using Assets.Scripts;
-using Snake.Head;
+﻿using Snake.Head;
 
 namespace Snake.Body
 {
     public class BodyMoveUpdater : IUpdater
     {
-        private GameModel _gameModel;
-        private GameView _gameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
 
         public BodyMoveUpdater(GameModel gameModel, GameView gameView)
         {
@@ -16,25 +15,27 @@ namespace Snake.Body
         
         public void Update()
         {
-            PositionAndRotationHolder holder = new PositionAndRotationHolder(_gameModel.SnakeModel.Head.Position,
-                _gameModel.SnakeModel.Head.Rotation, _gameModel.SnakeModel.Head.IsEatedFood);
+            SnakeModel snakeModel = _gameModel.SnakeModel;
+
+            PositionAndRotationHolder holder = new PositionAndRotationHolder(snakeModel.Head.Position,
+                snakeModel.Head.Rotation, snakeModel.Head.IsEatedFood);
             PositionAndRotationHolder nextHolder = holder;
 
-            _gameModel.SnakeModel.Head.IsEatedFood = false;
+            snakeModel.Head.IsEatedFood = false;
 
             var body = _gameView.BodySnakeView.PartsOfBodySnake;
             
             for (int i = 0; i < body.Count; i++)
             {
                 body[i].History.Enqueue(nextHolder);
-                nextHolder = body[i].Move(_gameModel.SnakeModel.Body.GapBetweenPositionsOfBodyParts);
+                nextHolder = body[i].Move(snakeModel.Body.GapBetweenPositionsOfBodyParts);
                 if (nextHolder == null) return;
 
                 if (i == body.Count - 1)
                 {
                     if (nextHolder.IsEatedFood)
                     {
-                        _gameModel.SnakeModel.Body.CreatePartOfBody();
+                        snakeModel.Body.CreatePartOfBody();
                         break;
                     }
                 }

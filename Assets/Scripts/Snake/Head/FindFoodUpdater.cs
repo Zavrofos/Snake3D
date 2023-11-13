@@ -1,31 +1,36 @@
-﻿using Assets.Scripts;
-using FoodDir;
+﻿using FoodDir;
 using UnityEngine;
 
 namespace Snake.Head
 {
     public class FindFoodUpdater : IUpdater
     {
-        private GameModel _gameModel;
-        private GameView _gameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
+        private readonly Collider[] _results;
 
-        public FindFoodUpdater(GameModel gameModel, GameView gameView)
+        public FindFoodUpdater(GameModel gameModel, GameView gameView, int maxFoodCollisionResultCount)
         {
             _gameModel = gameModel;
             _gameView = gameView;
+            _results = new Collider[maxFoodCollisionResultCount];
         }
         
         public void Update()
         {
-            var food = Physics.OverlapSphere(_gameModel.SnakeModel.Head.Position, _gameModel.SnakeModel.Head.RadiusFindFood, LayerMask.GetMask("Food"));
-            foreach (var part in food)
+            SnakeModel snakeModel = _gameModel.SnakeModel;
+            SpawnFoodModel spawnFoodModel = _gameModel.SpawnFoodModel;
+            
+            var size = Physics.OverlapSphereNonAlloc(snakeModel.Head.Position, 
+                snakeModel.Head.RadiusFindFood, 
+                _results, 
+                LayerMask.GetMask("Food"));
+            
+            for (int i = 0; i < size; i++)
             {
-                if (part.TryGetComponent<FoodView>(out FoodView foodView))
+                if (_results[i].TryGetComponent(out FoodView foodView) && spawnFoodModel.ActiveFood.TryGetValue(foodView.Id, out var foodModel))
                 {
-                    if (_gameModel.SpawnFoodModel.ActiveFood.ContainsKey(foodView.Id))
-                    {
-                        _gameModel.SpawnFoodModel.ActiveFood[foodView.Id].CurrentStateFood = StateFood.MoveToHeadSnake;
-                    }
+                    foodModel.CurrentStateFood = StateFood.MoveToHeadSnake;
                 }
             }
         }

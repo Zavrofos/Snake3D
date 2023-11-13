@@ -1,16 +1,14 @@
-﻿using Assets.Scripts;
-
-namespace Snake.Body
+﻿namespace Snake.Body
 {
     public class InitializeBodySnakePresenter : IPresenter
     {
-        private GameModel _gameModel;
-        public GameView _GameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
 
         public InitializeBodySnakePresenter(GameModel gameModel, GameView gameView)
         {
             _gameModel = gameModel;
-            _GameView = gameView;
+            _gameView = gameView;
         }
         
         public void Subscribe()
@@ -25,9 +23,11 @@ namespace Snake.Body
 
         private void OnInitializeBodySnake()
         {
-            for (int i = 0; i < _gameModel.SnakeModel.InitialCountPartOfBody; i++)
+            SnakeModel snakeModel = _gameModel.SnakeModel;
+            
+            for (int i = 0; i < snakeModel.InitialCountPartOfBody; i++)
             {
-                _gameModel.SnakeModel.Body.CreatePartOfBody();
+                snakeModel.Body.CreatePartOfBody();
             }
         }
     }

@@ -6,6 +6,6 @@ namespace FoodDir
     public class SpawnFoodView : MonoBehaviour
     {
         public FoodView FoodPrefab;
-        public Dictionary<int, FoodView> ActiveFoodView = new();
+        public readonly Dictionary<int, FoodView> ActiveFoodView = new();
     }
 }

@@ -9,7 +9,7 @@ namespace FoodDir
         public readonly float RadiusCheckNearFood = 5;
         public readonly int LengthRayForSpawnFood = 50;
         public readonly float SpeedFood;
-        public Dictionary<int, FoodModel> ActiveFood = new();
+        public readonly Dictionary<int, FoodModel> ActiveFood = new();
 
         public event Action SpawnedFood;
         public event Action<FoodModel> RemovedFood;

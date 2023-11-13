@@ -1,12 +1,11 @@
-﻿using Assets.Scripts;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Snake.Body
 {
     public class CreatePartOfBodyPresenter : IPresenter
     {
-        private GameModel _gameModel;
-        private GameView _gameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
 
         public CreatePartOfBodyPresenter(GameModel gameModel, GameView gameView)
         {
@@ -26,11 +25,13 @@ namespace Snake.Body
 
         private void OnCreatePartOfBodySnake()
         {
-            PartOfBodySnakeView partOfBodySnakeView =
-                GameObject.Instantiate(_gameView.BodySnakeView.PartOfBodySnakePrefab,
-                    _gameView.BodySnakeView.transform);
+            BodySnakeView bodySnakeView = _gameView.BodySnakeView;
             
-            _gameView.BodySnakeView.PartsOfBodySnake.Add(partOfBodySnakeView);
+            PartOfBodySnakeView partOfBodySnakeView =
+                GameObject.Instantiate(bodySnakeView.PartOfBodySnakePrefab,
+                    bodySnakeView.transform);
+            
+            bodySnakeView.PartsOfBodySnake.Add(partOfBodySnakeView);
         }
     }
 }

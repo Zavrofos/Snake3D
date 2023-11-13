@@ -1,12 +1,12 @@
-﻿using Assets.Scripts;
+﻿using Touch;
 using UnityEngine;
 
 namespace Snake.MoveController
 {
     public class MovementUpdater : IUpdater
     {
-        private GameModel _gameModel;
-        private GameView _gameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
 
         public MovementUpdater(GameModel gameModel, GameView gameView)
         {
@@ -16,24 +16,29 @@ namespace Snake.MoveController
         
         public void Update()
         {
-            var position = _gameView.MovementController.Rigb.position;
-            var rayDirection = _gameView.SurfaceForMovement.position - position;
+            MovementControllerView movementControllerView = _gameView.MovementController;
+            MovementController movementController = _gameModel.MovementController;
+            Transform surfaceForMovement = _gameView.SurfaceForMovement;
+            TouchModel touchModel = _gameModel.TouchModel;
+            
+            var position = movementControllerView.Rigb.position;
+            var rayDirection = surfaceForMovement.position - position;
             
             var ray = new Ray(position, rayDirection);
             if (Physics.Raycast(ray, out var hit, rayDirection.magnitude, LayerMask.GetMask("SurfaceForMovement")))
             {
                 var upDirection = -rayDirection.normalized;
-                _gameView.MovementController.Rigb.MovePosition(hit.point + upDirection);
-                _gameView.MovementController.Rigb.MoveRotation(Quaternion.FromToRotation(-_gameView.MovementController.transform.up, rayDirection) * _gameView.MovementController.transform.rotation);
+                movementControllerView.Rigb.MovePosition(hit.point + upDirection);
+                movementControllerView.Rigb.MoveRotation(Quaternion.FromToRotation(-movementControllerView.transform.up, rayDirection) * movementControllerView.transform.rotation);
             }
             
-            var transform1 = _gameView.MovementController.transform;
-            var forward = transform1.forward * _gameModel.TouchModel.LerpDirection.y;
-            var right = transform1.right * _gameModel.TouchModel.LerpDirection.x;
+            var movementControllerViewTransform = movementControllerView.transform;
+            var forward = movementControllerViewTransform.forward * touchModel.LerpDirection.y;
+            var right = movementControllerViewTransform.right * touchModel.LerpDirection.x;
             
-            _gameView.MovementController.Rigb.velocity = (forward + right) * _gameModel.MovementController.SpeedSnake;
+            movementControllerView.Rigb.velocity = (forward + right) * movementController.SpeedSnake;
 
-            _gameModel.MovementController.Position = _gameView.MovementController.transform.position;
+            movementController.Position = movementControllerViewTransform.position;
         }
     }
 }

@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripts;
 using UnityEngine;
 
 namespace FoodDir
 {
     public class MoveFoodToHeadSnakeUpdater : IUpdater
     {
-        private GameModel _gameModel;
-        private GameView _gameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
 
         public MoveFoodToHeadSnakeUpdater(GameModel gameModel, GameView gameView)
         {
