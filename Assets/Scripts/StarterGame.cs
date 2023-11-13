@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Camera;
 using FoodDir;
-using Snake;
 using Snake.Body;
 using Snake.Head;
 using Snake.MoveController;

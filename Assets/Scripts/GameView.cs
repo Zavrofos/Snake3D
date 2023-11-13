@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using FoodDir;
-using Snake;
+﻿using FoodDir;
 using Snake.Body;
 using Snake.Head;
 using Snake.MoveController;

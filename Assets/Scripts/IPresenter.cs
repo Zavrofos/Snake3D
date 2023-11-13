@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-
-public interface IPresenter 
+﻿public interface IPresenter 
 {
     void Subscribe();
     void Unsubscribe();

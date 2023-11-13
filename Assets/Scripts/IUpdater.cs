@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-
-public interface IUpdater 
+﻿public interface IUpdater 
 {
     void Update();
 }
