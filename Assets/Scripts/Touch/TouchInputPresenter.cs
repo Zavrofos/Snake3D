@@ -33,76 +33,86 @@ namespace Touch
             EnhancedTouchSupport.Disable();
         }
 
-        private void HandleFingerMove(Finger MovedFinger)
+        private void HandleFingerMove(Finger movedFinger)
         {
-            if (MovedFinger == _movementFinger)
+            TouchModel touchModel = _gameModel.TouchModel;
+            FloatingJoystickView joystickView = _gameView.JoystickView;
+            
+            if (movedFinger == _movementFinger)
             {
                 Vector2 knobPosition;
-                float maxMovement = _gameModel.TouchModel.JoystickSize.x / 2f;
-                ETouch.Touch currentTouch = MovedFinger.currentTouch;
+                float maxMovement = touchModel.JoystickSize.x / 2f;
+                ETouch.Touch currentTouch = movedFinger.currentTouch;
 
-                if (Vector2.Distance(currentTouch.screenPosition, _gameView.JoystickView.RectTransform.anchoredPosition) > maxMovement)
+                if (Vector2.Distance(currentTouch.screenPosition, joystickView.RectTransform.anchoredPosition) > maxMovement)
                 {
-                    knobPosition = (currentTouch.screenPosition - _gameView.JoystickView.RectTransform.anchoredPosition).normalized * maxMovement;
+                    knobPosition = (currentTouch.screenPosition - joystickView.RectTransform.anchoredPosition).normalized * maxMovement;
                 }
                 else
                 {
-                    knobPosition = currentTouch.screenPosition - _gameView.JoystickView.RectTransform.anchoredPosition;
+                    knobPosition = currentTouch.screenPosition - joystickView.RectTransform.anchoredPosition;
                 }
 
-                _gameView.JoystickView.Knob.anchoredPosition = knobPosition;
+                joystickView.Knob.anchoredPosition = knobPosition;
 
                 if(knobPosition != Vector2.zero)
                 {
-                    _gameModel.TouchModel.TouchDirection = knobPosition / maxMovement;
+                    touchModel.TouchDirection = knobPosition / maxMovement;
                 }
             }
         }
 
-        private void HandleLoseFinger(Finger LostFinger)
+        private void HandleLoseFinger(Finger lostFinger)
         {
-            if (LostFinger == _movementFinger)
+            FloatingJoystickView joystickView = _gameView.JoystickView;
+            
+            if (lostFinger == _movementFinger)
             {
                 _movementFinger = null;
-                _gameView.JoystickView.Knob.anchoredPosition = Vector2.zero;
-                _gameView.JoystickView.gameObject.SetActive(false);
+                joystickView.Knob.anchoredPosition = Vector2.zero;
+                joystickView.gameObject.SetActive(false);
             }
         }
 
-        private void HandleFingerDown(Finger TouchedFinger)
+        private void HandleFingerDown(Finger touchedFinger)
         {
+            TouchModel touchModel = _gameModel.TouchModel;
+            FloatingJoystickView joystickView = _gameView.JoystickView;
+            
             if (_movementFinger == null)
             {
-                _movementFinger = TouchedFinger;
-                _gameModel.TouchModel.TouchDirection = Vector2.zero;
-                _gameView.JoystickView.gameObject.SetActive(true);
-                _gameView.JoystickView.RectTransform.sizeDelta = _gameModel.TouchModel.JoystickSize;
-                _gameView.JoystickView.RectTransform.anchoredPosition = ClampStartPosition(TouchedFinger.screenPosition);
+                _movementFinger = touchedFinger;
+                touchModel.TouchDirection = Vector2.zero;
+                joystickView.gameObject.SetActive(true);
+                joystickView.RectTransform.sizeDelta = touchModel.JoystickSize;
+                joystickView.RectTransform.anchoredPosition = ClampStartPosition(touchedFinger.screenPosition);
             }
         }
 
-        private Vector2 ClampStartPosition(Vector2 StartPosition)
+        private Vector2 ClampStartPosition(Vector2 startPosition)
         {
-            if (StartPosition.x < _gameModel.TouchModel.JoystickSize.x / 2)
+            TouchModel touchModel = _gameModel.TouchModel;
+            
+            if (startPosition.x < touchModel.JoystickSize.x / 2)
             {
-                StartPosition.x = _gameModel.TouchModel.JoystickSize.x / 2;
+                startPosition.x = touchModel.JoystickSize.x / 2;
             }
 
-            if(StartPosition.x > Screen.width - _gameModel.TouchModel.JoystickSize.x / 2)
+            if(startPosition.x > Screen.width - touchModel.JoystickSize.x / 2)
             {
-                StartPosition.x = Screen.width - _gameModel.TouchModel.JoystickSize.x / 2;
+                startPosition.x = Screen.width - touchModel.JoystickSize.x / 2;
             }
 
-            if (StartPosition.y < _gameModel.TouchModel.JoystickSize.y / 2)
+            if (startPosition.y < touchModel.JoystickSize.y / 2)
             {
-                StartPosition.y = _gameModel.TouchModel.JoystickSize.y / 2;
+                startPosition.y = touchModel.JoystickSize.y / 2;
             }
-            else if (StartPosition.y > Screen.height - _gameModel.TouchModel.JoystickSize.y / 2)
+            else if (startPosition.y > Screen.height - touchModel.JoystickSize.y / 2)
             {
-                StartPosition.y = Screen.height - _gameModel.TouchModel.JoystickSize.y / 2;
+                startPosition.y = Screen.height - touchModel.JoystickSize.y / 2;
             }
 
-            return StartPosition;
+            return startPosition;
         }
     }
 }

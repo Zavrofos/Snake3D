@@ -15,9 +15,11 @@ namespace Touch
         
         public void Update()
         {
-            var touchDirection = _gameModel.TouchModel.TouchDirection;
+            TouchModel touchModel = _gameModel.TouchModel;
             
-            float fromDegreeAngle = _gameModel.TouchModel.LerpAngle * Mathf.Rad2Deg;
+            var touchDirection = touchModel.TouchDirection;
+            
+            float fromDegreeAngle = touchModel.LerpAngle * Mathf.Rad2Deg;
 
             switch (fromDegreeAngle)
             {
@@ -46,11 +48,11 @@ namespace Touch
                     toDegreesAngle += 360;
             }
 
-            _gameModel.TouchModel.LerpAngle = fromDegreeAngle * Mathf.Deg2Rad;
+            touchModel.LerpAngle = fromDegreeAngle * Mathf.Deg2Rad;
             _toAngle = toDegreesAngle * Mathf.Deg2Rad;
             
-            _gameModel.TouchModel.LerpAngle = Mathf.Lerp(_gameModel.TouchModel.LerpAngle, _toAngle, Time.deltaTime * _gameModel.TouchModel.SpeedLerpDirection);
-            _gameModel.TouchModel.LerpDirection = new Vector2(Mathf.Sin(_gameModel.TouchModel.LerpAngle), Mathf.Cos(_gameModel.TouchModel.LerpAngle));
+            touchModel.LerpAngle = Mathf.Lerp(touchModel.LerpAngle, _toAngle, Time.deltaTime * touchModel.SpeedLerpDirection);
+            touchModel.LerpDirection = new Vector2(Mathf.Sin(touchModel.LerpAngle), Mathf.Cos(touchModel.LerpAngle));
         }
     }
 }
