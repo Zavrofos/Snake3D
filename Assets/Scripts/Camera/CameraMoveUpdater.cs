@@ -16,8 +16,9 @@ namespace Camera
         
         public void Update()
         {
-            var direction = (_gameModel.MovementController.Position - _gameView.SurfaceForMovement.position).normalized;
-            _gameView.CameraView.position = _gameView.SurfaceForMovement.position + direction * _gameModel.CameraModel.DistanceCamera;
+            var surfacePosition = _gameView.SurfaceForMovement.position;
+            var direction = (_gameModel.MovementController.Position - surfacePosition).normalized;
+            _gameView.CameraView.position = surfacePosition + direction * _gameModel.CameraModel.DistanceCamera;
             _gameView.CameraView.rotation = Quaternion.LookRotation(-direction, _gameView.CameraView.transform.up);
         }
     }
