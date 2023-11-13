@@ -21,6 +21,7 @@ public class StarterGame : MonoBehaviour
     public float SpeedSnake;
     public float CameraDistance;
     public int GapBetweenPositionsOfBodyParts;
+    public int InitialCountFood;
 
     private List<IPresenter> _presenters;
     private List<IUpdater> _updaters;
@@ -31,7 +32,7 @@ public class StarterGame : MonoBehaviour
     private void Awake()
     {
         GameModel = new GameModel(InitialCountPartOfBodySnake, JoystickSize, SpeedLerpDirection,
-            SpeedSnake, CameraDistance, GapBetweenPositionsOfBodyParts);
+            SpeedSnake, CameraDistance, GapBetweenPositionsOfBodyParts, InitialCountFood);
         
         _presenters = new List<IPresenter>()
         {
