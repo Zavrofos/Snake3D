@@ -25,6 +25,7 @@ public class StarterGame : MonoBehaviour
     public int InitialCountFood;
     public float SpeedFood;
     public float RadiusFindFood;
+    public int MaxFoodCollisionResultCount;
 
     private List<IPresenter> _presenters;
     private List<IUpdater> _updaters;
@@ -52,7 +53,7 @@ public class StarterGame : MonoBehaviour
             new LerpDirectionUpdater(GameModel),
             new RotationSnakeHeadUpdater(GameModel, GameView),
             new MoveFoodToHeadSnakeUpdater(GameModel, GameView),
-            new FindFoodUpdater(GameModel, GameView)
+            new FindFoodUpdater(GameModel, GameView, MaxFoodCollisionResultCount)
         };
 
         _fixedUpdaters = new List<IUpdater>()
