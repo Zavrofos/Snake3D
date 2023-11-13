@@ -19,10 +19,17 @@ namespace Snake.Head
         
         public void Update()
         {
-            var size = Physics.OverlapSphereNonAlloc(_gameModel.SnakeModel.Head.Position, _gameModel.SnakeModel.Head.RadiusFindFood, _results, LayerMask.GetMask("Food"));
+            SnakeModel snakeModel = _gameModel.SnakeModel;
+            SpawnFoodModel spawnFoodModel = _gameModel.SpawnFoodModel;
+            
+            var size = Physics.OverlapSphereNonAlloc(snakeModel.Head.Position, 
+                snakeModel.Head.RadiusFindFood, 
+                _results, 
+                LayerMask.GetMask("Food"));
+            
             for (int i = 0; i < size; i++)
             {
-                if (_results[i].TryGetComponent(out FoodView foodView) && _gameModel.SpawnFoodModel.ActiveFood.TryGetValue(foodView.Id, out var foodModel))
+                if (_results[i].TryGetComponent(out FoodView foodView) && spawnFoodModel.ActiveFood.TryGetValue(foodView.Id, out var foodModel))
                 {
                     foodModel.CurrentStateFood = StateFood.MoveToHeadSnake;
                 }

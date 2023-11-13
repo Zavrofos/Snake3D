@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using Touch;
 using UnityEngine;
 
 namespace Snake.Head
@@ -16,8 +17,11 @@ namespace Snake.Head
         
         public void Update()
         {
-            float angle = _gameModel.TouchModel.LerpAngle * Mathf.Rad2Deg;
-            _gameView.SnakeHeadView.Head.localRotation = Quaternion.Euler(new Vector3(0, angle,0));
+            TouchModel touchModel = _gameModel.TouchModel;
+            SnakeHeadView snakeHeadView = _gameView.SnakeHeadView;
+            
+            float angle = touchModel.LerpAngle * Mathf.Rad2Deg;
+            snakeHeadView.Head.localRotation = Quaternion.Euler(new Vector3(0, angle,0));
         }
     }
 }
