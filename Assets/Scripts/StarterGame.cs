@@ -40,7 +40,8 @@ public class StarterGame : MonoBehaviour
             new TouchInputPresenter(GameModel, GameView),
             new InitializeBodySnakePresenter(GameModel, GameView),
             new CreatePartOfBodyPresenter(GameModel, GameView),
-            new InitialSpawnFoodPresenter(GameModel, GameView)
+            new InitialSpawnFoodPresenter(GameModel, GameView),
+            new SpawnFoodPresenter(GameModel, GameView)
         };
         
         _updaters = new List<IUpdater>()

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using FoodDir;
 using Snake;
 using Snake.Body;
 using Snake.Head;
@@ -14,4 +15,5 @@ public class GameView : MonoBehaviour
     public SnakeHeadView SnakeHeadView;
     public Transform CameraView;
     public BodySnakeView BodySnakeView;
+    public SpawnFoodView SpawnFoodView;
 }
