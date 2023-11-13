@@ -1,6 +1,4 @@
-﻿using Assets.Scripts;
-
-namespace Snake.Body
+﻿namespace Snake.Body
 {
     public class InitializeBodySnakePresenter : IPresenter
     {

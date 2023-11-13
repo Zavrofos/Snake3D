@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts;
 using Camera;
 using FoodDir;
 using Snake;
@@ -67,8 +66,6 @@ public class StarterGame : MonoBehaviour
         {
             new CameraMoveUpdater(GameModel, GameView)
         };
-        
-        
     }
 
     private void Start()

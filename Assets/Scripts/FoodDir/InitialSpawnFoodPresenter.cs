@@ -1,6 +1,4 @@
-﻿using Assets.Scripts;
-
-namespace FoodDir
+﻿namespace FoodDir
 {
     public class InitialSpawnFoodPresenter : IPresenter
     {

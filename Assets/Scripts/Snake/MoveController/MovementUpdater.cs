@@ -1,5 +1,4 @@
-﻿using Assets.Scripts;
-using Touch;
+﻿using Touch;
 using UnityEngine;
 
 namespace Snake.MoveController

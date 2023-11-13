@@ -1,5 +1,4 @@
-﻿using Assets.Scripts;
-using FoodDir;
+﻿using FoodDir;
 using UnityEngine;
 
 namespace Snake.Head

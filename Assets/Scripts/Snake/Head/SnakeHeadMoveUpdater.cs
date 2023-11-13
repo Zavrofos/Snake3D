@@ -1,5 +1,4 @@
-﻿using Assets.Scripts;
-using Snake.MoveController;
+﻿using Snake.MoveController;
 using UnityEngine;
 
 namespace Snake.Head

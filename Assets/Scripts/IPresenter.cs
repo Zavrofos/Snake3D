@@ -1,11 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts
+public interface IPresenter 
 {
-    public interface IPresenter 
-    {
-        void Subscribe();
-        void Unsubscribe();
-    }
+    void Subscribe();
+    void Unsubscribe();
 }

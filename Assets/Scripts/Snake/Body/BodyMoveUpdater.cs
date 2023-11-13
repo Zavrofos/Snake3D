@@ -1,5 +1,4 @@
-﻿using Assets.Scripts;
-using Snake.Head;
+﻿using Snake.Head;
 
 namespace Snake.Body
 {
