@@ -42,7 +42,8 @@ public class StarterGame : MonoBehaviour
             new InitializeBodySnakePresenter(GameModel, GameView),
             new CreatePartOfBodyPresenter(GameModel, GameView),
             new InitialSpawnFoodPresenter(GameModel, GameView),
-            new SpawnFoodPresenter(GameModel, GameView)
+            new SpawnFoodPresenter(GameModel, GameView),
+            new RemoveFoodPresenter(GameModel, GameView)
         };
         
         _updaters = new List<IUpdater>()

@@ -20,6 +20,8 @@ namespace Snake.Body
                 _gameModel.SnakeModel.Head.Rotation, _gameModel.SnakeModel.Head.IsEatedFood);
             PositionAndRotationHolder nextHolder = holder;
 
+            _gameModel.SnakeModel.Head.IsEatedFood = false;
+
             var body = _gameView.BodySnakeView.PartsOfBodySnake;
             
             for (int i = 0; i < body.Count; i++)
