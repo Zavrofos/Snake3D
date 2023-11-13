@@ -5,8 +5,8 @@ namespace Camera
 {
     public class CameraMoveUpdater : IUpdater
     {
-        private GameModel _gameModel;
-        private GameView _gameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
 
         public CameraMoveUpdater(GameModel gameModel, GameView gameView)
         {

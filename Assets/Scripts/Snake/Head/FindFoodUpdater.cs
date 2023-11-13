@@ -6,8 +6,8 @@ namespace Snake.Head
 {
     public class FindFoodUpdater : IUpdater
     {
-        private GameModel _gameModel;
-        private GameView _gameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
 
         public FindFoodUpdater(GameModel gameModel, GameView gameView)
         {

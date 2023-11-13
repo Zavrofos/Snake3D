@@ -5,8 +5,8 @@ namespace Snake.MoveController
 {
     public class MovementUpdater : IUpdater
     {
-        private GameModel _gameModel;
-        private GameView _gameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
 
         public MovementUpdater(GameModel gameModel, GameView gameView)
         {

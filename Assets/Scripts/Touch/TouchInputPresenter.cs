@@ -7,8 +7,8 @@ namespace Touch
 {
     public class TouchInputPresenter : IPresenter
     {
-        private GameModel _gameModel;
-        private GameView _gameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
         private Finger _movementFinger;
 
         public TouchInputPresenter(GameModel gameModel, GameView gameView)

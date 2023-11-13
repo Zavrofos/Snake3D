@@ -5,8 +5,8 @@ namespace Snake.Body
 {
     public class BodyMoveUpdater : IUpdater
     {
-        private GameModel _gameModel;
-        private GameView _gameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
 
         public BodyMoveUpdater(GameModel gameModel, GameView gameView)
         {

@@ -5,7 +5,7 @@ namespace Touch
 {
     public class LerpDirectionUpdater : IUpdater
     {
-        private GameModel _gameModel;
+        private readonly GameModel _gameModel;
         private float _toAngle;
 
         public LerpDirectionUpdater(GameModel gameModel)

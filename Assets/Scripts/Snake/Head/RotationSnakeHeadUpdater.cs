@@ -5,8 +5,8 @@ namespace Snake.Head
 {
     public class RotationSnakeHeadUpdater : IUpdater
     {
-        private GameModel _gameModel;
-        private GameView _gameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
 
         public RotationSnakeHeadUpdater(GameModel gameModel, GameView gameView)
         {

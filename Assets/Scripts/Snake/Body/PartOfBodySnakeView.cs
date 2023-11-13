@@ -6,7 +6,7 @@ namespace Snake.Body
 {
     public class PartOfBodySnakeView : MonoBehaviour
     {
-        public Queue<PositionAndRotationHolder> History = new();
+        public readonly Queue<PositionAndRotationHolder> History = new();
         
         public PositionAndRotationHolder Move(int gap)
         {

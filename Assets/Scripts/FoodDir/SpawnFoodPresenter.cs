@@ -5,8 +5,8 @@ namespace FoodDir
 {
     public class SpawnFoodPresenter : IPresenter
     {
-        private GameModel _gameModel;
-        private GameView _gameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
         private int _countId;
 
         public SpawnFoodPresenter(GameModel gameModel, GameView gameView)

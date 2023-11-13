@@ -5,8 +5,8 @@ namespace FoodDir
 {
     public class RemoveFoodPresenter : IPresenter
     {
-        private GameModel _gameModel;
-        private GameView _gameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
 
         public RemoveFoodPresenter(GameModel gameModel, GameView gameView)
         {

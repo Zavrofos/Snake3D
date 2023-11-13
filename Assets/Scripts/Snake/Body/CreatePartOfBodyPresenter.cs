@@ -5,8 +5,8 @@ namespace Snake.Body
 {
     public class CreatePartOfBodyPresenter : IPresenter
     {
-        private GameModel _gameModel;
-        private GameView _gameView;
+        private readonly GameModel _gameModel;
+        private readonly GameView _gameView;
 
         public CreatePartOfBodyPresenter(GameModel gameModel, GameView gameView)
         {
