@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using Snake.MoveController;
 using UnityEngine;
 
 namespace Snake.Head
@@ -16,18 +17,23 @@ namespace Snake.Head
         
         public void Update()
         {
-            var position = _gameModel.MovementController.Position;
-            var rayDirection = _gameView.SurfaceForMovement.position - position;
+            MovementController movementController = _gameModel.MovementController;
+            MovementControllerView movementControllerView = _gameView.MovementController;
+            Transform surfaceForMovement = _gameView.SurfaceForMovement;
+            SnakeHeadView snakeHeadView = _gameView.SnakeHeadView;
+            SnakeModel snakeModel = _gameModel.SnakeModel;
+            
+            var position = movementController.Position;
+            var rayDirection = surfaceForMovement.position - position;
             var ray = new Ray(position, rayDirection);
             
             if (Physics.Raycast(ray, out var hit1, rayDirection.magnitude, LayerMask.GetMask("Apple")))
             {
                 var upDirection = -rayDirection.normalized * 0.5f;
-                _gameView.SnakeHeadView.transform.position = hit1.point + upDirection;
-                _gameView.SnakeHeadView.transform.rotation = Quaternion.FromToRotation(-_gameView.MovementController.transform.up, rayDirection) * _gameView.SnakeHeadView.transform.rotation;
-
-                _gameModel.SnakeModel.Head.Position = _gameView.SnakeHeadView.transform.position;
-                _gameModel.SnakeModel.Head.Rotation = _gameView.SnakeHeadView.Head.transform.rotation;
+                snakeHeadView.transform.position = hit1.point + upDirection;
+                snakeHeadView.transform.rotation = Quaternion.FromToRotation(-movementControllerView.transform.up, rayDirection) * snakeHeadView.transform.rotation;
+                snakeModel.Head.Position = snakeHeadView.transform.position;
+                snakeModel.Head.Rotation = snakeHeadView.Head.transform.rotation;
             }
         }
     }
