@@ -14,8 +14,9 @@ namespace Snake.Body
                 return null;
 
             PositionAndRotationHolder holder = History.Dequeue();
-            transform.position = holder.Position;
-            transform.rotation = holder.Rotation;
+            var partOfBodyTransform = transform;
+            partOfBodyTransform.position = holder.Position;
+            partOfBodyTransform.rotation = holder.Rotation;
             return holder;
         }
     }

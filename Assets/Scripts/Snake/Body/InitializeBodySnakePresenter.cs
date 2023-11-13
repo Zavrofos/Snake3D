@@ -25,9 +25,11 @@ namespace Snake.Body
 
         private void OnInitializeBodySnake()
         {
-            for (int i = 0; i < _gameModel.SnakeModel.InitialCountPartOfBody; i++)
+            SnakeModel snakeModel = _gameModel.SnakeModel;
+            
+            for (int i = 0; i < snakeModel.InitialCountPartOfBody; i++)
             {
-                _gameModel.SnakeModel.Body.CreatePartOfBody();
+                snakeModel.Body.CreatePartOfBody();
             }
         }
     }

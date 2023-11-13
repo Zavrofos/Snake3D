@@ -26,11 +26,13 @@ namespace Snake.Body
 
         private void OnCreatePartOfBodySnake()
         {
-            PartOfBodySnakeView partOfBodySnakeView =
-                GameObject.Instantiate(_gameView.BodySnakeView.PartOfBodySnakePrefab,
-                    _gameView.BodySnakeView.transform);
+            BodySnakeView bodySnakeView = _gameView.BodySnakeView;
             
-            _gameView.BodySnakeView.PartsOfBodySnake.Add(partOfBodySnakeView);
+            PartOfBodySnakeView partOfBodySnakeView =
+                GameObject.Instantiate(bodySnakeView.PartOfBodySnakePrefab,
+                    bodySnakeView.transform);
+            
+            bodySnakeView.PartsOfBodySnake.Add(partOfBodySnakeView);
         }
     }
 }
